@@ -1,0 +1,927 @@
+openapi: 3.0.0
+info:
+  title: Car Site Brands API
+  version: 1.0.0
+  description: API for managing brands on Car Site Api
+servers:
+  - url: http://localhost:5003
+    description: Development server
+paths:
+  "/api/make":
+    post:
+      summary: Create a new make
+      tags:
+        - Makes
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                makeName:
+                  type: string
+                origin:
+                  type: string
+                makeImage:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Make created successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    makeName:
+                      type: string
+                    origin:
+                      type: string
+                    makeLogo:
+                      type: string
+                    active:
+                      type: boolean
+                    createdAt:
+                      type: string
+        "400":
+          description: Bad request
+    get:
+      summary: View all makes
+      parameters:
+        - name: makeName
+          in: query
+          description: "Make Name"
+          required: false
+        - name: origin
+          in: query
+          description: "Origin"
+          required: false
+        - name: createdAt
+          in: query
+          description: "Created At"
+          required: false
+        - name: page
+          in: query
+          description: "Page"
+          required: false
+        - name: limit
+          in: query
+          description: "Limit"
+          required: false
+        - name: startDate
+          in: query
+          description: "Start Date (YYYY-MM-DD)"
+          required: false
+        - name: endDate
+          in: query
+          description: "End Date (YYYY-MM-DD)"
+          required: false
+        - name: orderBy
+          in: query
+          description: "Order By"
+          required: false
+          schema:
+            type: object
+            properties:
+              orderBy:
+                type: object
+                properties:
+                  makeName:
+                    type: string
+                    description: "Order by make name"
+                  origin:
+                    type: string
+                    description: "Order by origin"
+                  active:
+                    type: boolean
+                    description: "Order by active"
+                  createdAt:
+                    type: string
+                    description: "Order By created at"
+      tags:
+        - Makes
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        makeName:
+                          type: string
+                        origin:
+                          type: string
+                        make_logo:
+                          type: string
+                        active:
+                          type: boolean
+                        createdAt:
+                          type: string
+                  total:
+                    type: number
+                  page:
+                    type: number
+                  limit:
+                    type: number
+  "/api/make/{id}":
+    get:
+      summary: Get Make by Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Make Id
+          schema:
+            type: string
+      tags:
+        - Makes
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  makeName:
+                    type: string
+                  origin:
+                    type: string
+                  makeLogo:
+                    type: string
+                  active:
+                    type: boolean
+                  createdAt:
+                    type: string
+    delete:
+      summary: Delete Make
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Make Id
+          schema:
+            type: string
+      tags:
+        - Makes
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: boolean
+    put:
+      summary: Update Make
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Make Id
+          schema:
+            type: string
+      tags:
+        - Makes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                makeName:
+                  type: string
+                origin:
+                  type: string
+                makeImage:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Make updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+  "/api/make/carList":
+    get:
+      summary: Get a list of all cars
+      tags:
+        - Makes
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    makeName:
+                      type: string
+  "/api/make/changeMakeLogo/{id}":
+    patch:
+      summary: Change Make Logo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Make Id
+          schema:
+            type: string
+      tags:
+        - Makes
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                makeImage:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: Make updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+  "/api/make/verifyMake":
+    patch:
+      summary: Verify Make
+      tags:
+        - Makes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: Make updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+  "/api/make/multiples":
+    post:
+      summary: Create multiple models
+      tags:
+        - Makes
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                fileData:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Models created successfully
+        "400":
+          description: Bad request
+  "/api/model":
+    post:
+      summary: Create a new model
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                modelName:
+                  type: string
+                makeId:
+                  type: string
+      responses:
+        "201":
+          description: Model created successfully
+        "400":
+          description: Bad request
+    get:
+      summary: View all models
+      parameters:
+        - name: modelName
+          in: query
+          description: "Model Name"
+          required: false
+        - name: makeName
+          in: query
+          description: "Make Name"
+          required: false
+        - name: active
+          in: query
+          description: "Active"
+          required: false
+        - name: page
+          in: query
+          description: "Page"
+          required: false
+        - name: limit
+          in: query
+          description: "Limit"
+          required: false
+        - name: startDate
+          in: query
+          description: "Start Date (YYYY-MM-DD)"
+          required: false
+        - name: endDate
+          in: query
+          description: "End Date (YYYY-MM-DD)"
+          required: false
+        - name: active
+          in: query
+          description: "Active"
+          required: false
+        - name: orderBy
+          in: query
+          description: "Order By"
+          required: false
+          schema:
+            type: object
+            properties:
+              orderBy:
+                type: object
+                properties:
+                  modelName:
+                    type: string
+                    description: "Order by Model Name (asc | ASC | desc | DESC)"
+                  makeName:
+                    type: string
+                    description: "Order by make name (asc | ASC | desc | DESC)"
+                  active:
+                    type: string
+                    description: "Order by active (asc | ASC | desc | DESC)"
+                  createdAt:
+                    type: string
+                    description: "Order By created at (asc | ASC | desc | DESC)"
+      tags:
+        - Models
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        modelName:
+                          type: string
+                        makeId:
+                          type: string
+                        active:
+                          type: boolean
+                        createdAt:
+                          type: string
+                        makes:
+                          type: object
+                          properties:
+                            makeName:
+                              type: string
+                  total:
+                    type: number
+                  limit: 
+                    type: number
+                  page:
+                    type: number    
+  "/api/model/{id}":
+    get:
+      summary: Get Model by Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Model Id
+          schema:
+            type: string
+      tags:
+        - Models
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  modelName:
+                    type: string
+                  makeId:
+                    type: string
+                  active:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  makes:
+                    type: object
+                    properties:
+                      makeName:
+                        type: string
+    delete:
+      summary: Delete Model
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Model Id
+          schema:
+            type: string
+      tags:
+        - Models
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: boolean
+    put:
+      summary: Update Model
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Model Id
+          schema:
+            type: string
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                modelName:
+                  type: string
+                makeId:
+                  type: string
+      responses:
+        "200":
+          description: Make updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+  "/api/model/multiples":
+    post:
+      summary: Create multiple models
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                fileData:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Models created successfully
+        "400":
+          description: Bad request
+  "/api/model/modelsByMakeId/{makeId}":
+    get:
+      summary: Get models by makeId
+      parameters:
+        - name: makeId
+          in: path
+          required: true
+          description: Make Id
+          schema:
+            type: string
+      tags:
+        - Models
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    makeName:
+                      type: string
+                    origin:
+                      type: string
+                    makeLogo:
+                      type: string
+                    active:
+                      type: boolean
+                    createdAt:
+                      type: string
+                    makes:
+                      type: object
+                      properties:
+                        makeName:
+                          type: string
+  "/api/model/verifyModels":
+    patch:
+      summary: Verify Models
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: Model updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+  "/api/version":
+    get:
+      summary: View all versions
+      parameters:
+        - name: versionName
+          in: query
+          description: "Version Name"
+          required: false
+        - name: modelName
+          in: query
+          description: "Model Name"
+          required: false
+        - name: makeName
+          in: query
+          description: "Make Name"
+          required: false
+        - name: active
+          in: query
+          description: "Active"
+          required: false
+        - name: page
+          in: query
+          description: "Page"
+          required: false
+        - name: limit
+          in: query
+          description: "Limit"
+          required: false
+        - name: startDate
+          in: query
+          description: "Start Date (YYYY-MM-DD)"
+          required: false
+        - name: endDate
+          in: query
+          description: "End Date (YYYY-MM-DD)"
+          required: false
+        - name: active
+          in: query
+          description: "Active"
+          required: false
+        - name: orderBy
+          in: query
+          description: "Order By"
+          required: false
+          schema:
+            type: object
+            properties:
+              orderBy:
+                type: object
+                properties:
+                  versionName:
+                    type: string
+                    description: "Order by Version Name (asc | ASC | desc | DESC)"
+                  modelName:
+                    type: string
+                    description: "Order by Model Name (asc | ASC | desc | DESC)"
+                  makeName:
+                    type: string
+                    description: "Order by make name (asc | ASC | desc | DESC)"
+                  active:
+                    type: string
+                    description: "Order by active (asc | ASC | desc | DESC)"
+                  createdAt:
+                    type: string
+                    description: "Order By created at (asc | ASC | desc | DESC)"
+      tags:
+        - Versions
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      versionName:
+                        type: string
+                      modelId:
+                        type: string
+                      description:
+                        type: string
+                      active:
+                        type: boolean
+                      createdAt:
+                        type: string
+                      model:
+                        type: object
+                        properties:
+                          modelName:
+                            type: string
+                          make:
+                            type: object
+                            properties:
+                              makeName: 
+                                type: string
+                              makeId:
+                                type: string
+                total: 
+                  type: number
+                limit:
+                  type: number
+                page:
+                  type: number
+    post:
+      summary: Create a new version for a model
+      tags:
+        - Versions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                versionName:
+                  type: string
+                modelId:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "201":
+          description: Version created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  version_name:
+                    type: string
+                  description:
+                    type: string
+                  active:
+                    type: boolean
+                  created_at:
+                    type: string
+        "400":
+          description: Bad request
+  "/api/version/multiples":
+    post:
+      summary: Create multiple versions
+      tags:
+        - Versions
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                fileData:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Models created successfully
+        "400":
+          description: Bad request
+  "/api/version/getByModelId/{modelId}":
+    get:
+      summary: Get versions by modelId
+      parameters:
+        - name: modelId
+          in: path
+          required: true
+          description: Model Id
+          schema:
+            type: string
+      tags:
+        - Versions
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  versions:
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          versionName:
+                            type: string
+                          modelId:
+                            type: string
+                          description:
+                            type: string
+                          active:
+                            type: boolean
+                          createdAt:
+                            type: string
+                  make:
+                    type: object
+                    properties:
+                      makeName:
+                        type: string
+                      makeId:
+                        type: string 
+  "/api/version/verifyVersions":
+    patch:
+      summary: Verify Versions
+      tags:
+        - Versions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "200":
+          description: Model updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+  "/api/version/{id}":
+    get:
+      summary: Get Version by Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Version Id
+          schema:
+            type: string
+      tags:
+        - Versions
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  versionName:
+                    type: string
+                  modelId:
+                    type: string
+                  active:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  model:
+                    type: object
+                    properties:
+                      modelName:
+                        type: string
+                      make:
+                        type: object
+                        properties:
+                          makeId: 
+                            type: string
+                          makeName:
+                            type: string
+    delete:
+      summary: Delete Version
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Version Id
+          schema:
+            type: string
+      tags:
+        - Versions
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: boolean
+    put:
+      summary: Update Version
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Version Id
+          schema:
+            type: string
+      tags:
+        - Versions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                versionName:
+                  type: string
+                description:
+                  type: string
+                modelId:
+                  type: string
+      responses:
+        "200":
+          description: Version updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
