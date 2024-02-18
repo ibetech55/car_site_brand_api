@@ -19,8 +19,8 @@ class Models {
   @Column()
   active: boolean;
 
-  @Column()
-  body_type: string;
+  // @Column()
+  // body_type: string;
 
   @ManyToOne(type => Makes, makes => makes)
   @JoinColumn({ name: 'make_id' })
@@ -28,7 +28,7 @@ class Models {
 
   @OneToMany(() => Versions, version => version.models)
   @JoinColumn({ name: 'model_id' })
-  versions: Versions[];
+  versions?: Versions[];
 
   @CreateDateColumn()
   created_at?: Date | string;

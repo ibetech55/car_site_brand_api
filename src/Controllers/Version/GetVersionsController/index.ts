@@ -9,7 +9,7 @@ export class GetVersionsController {
   }
 
   async handle(request: Request, response: Response) {
-    const data = await this._getVersionsUseCase.execute();
+    const data = await this._getVersionsUseCase.execute(request.query);
     return response.status(200).json(data)
   }
 }

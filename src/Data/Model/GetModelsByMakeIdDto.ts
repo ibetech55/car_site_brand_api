@@ -6,7 +6,7 @@ export interface GetModelsByMakeIdDto {
     modelName:string;
     makeId: string;
     active: boolean;
-    make?: {makeName: string}
+    makes?: {makeName: string}
 }
 
 export interface IGetModelsByMakeId {

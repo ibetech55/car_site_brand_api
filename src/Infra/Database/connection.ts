@@ -16,5 +16,8 @@ const AppDataSource = new DataSource({
   logging: false,
   entities: [Makes, Models, Versions],
   migrations: [`${__dirname}/**/Migrations/*.{ts,js}`],
+  ssl:{
+    rejectUnauthorized: false
+  }
 });
 export { AppDataSource };

@@ -1,5 +1,5 @@
-import { UpdateModelDto } from "../../../Data/Model/UpdateModelDtos";
-import { IModelRepository } from "../../../Repositories/Model/IModelRepository";
+import { UpdateModelDto } from "../../../../Data/Model/UpdateModelDtos";
+import { IModelRepository } from "../../../../Repositories/Model/IModelRepository";
 
 export class UpdateModelUseCase {
   private _repository: IModelRepository;
