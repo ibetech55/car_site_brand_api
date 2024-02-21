@@ -73,7 +73,7 @@ class HttpServer {
   }
   defaultHeaders() {
     this.app.use((req, res, next) => {
-      const origin = this.corsOrgins.includes(req.headers.origin)
+      const origin = this.corsOrgins.includes(req.header('origin'))
         ? req.headers.origin
         : null;
 
