@@ -83,7 +83,7 @@ class HttpServer {
         "Content-Type, Authorization"
       );
 
-      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Origin", CAR_SITE_FRONTEND_URL);
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, PATCH"
