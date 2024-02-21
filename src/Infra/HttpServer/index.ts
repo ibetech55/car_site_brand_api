@@ -83,7 +83,7 @@ class HttpServer {
         "Content-Type, Authorization"
       );
 
-      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Origin", this.corsOrgins);
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, PATCH"
