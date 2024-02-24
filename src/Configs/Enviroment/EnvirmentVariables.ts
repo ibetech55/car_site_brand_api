@@ -6,3 +6,4 @@ export const DATABASE_USERNAME = process.env.DATABASE_USERNAME
 export const PORT = +process.env.PORT
 export const CAR_SITE_FRONTEND_URL = process.env.CAR_SITE_FRONTEND_URL
 export const BRAND_API_DOMAIN = process.env.BRAND_API_DOMAIN
+export const NODE_ENV = process.env.NODE_ENV

@@ -12,6 +12,7 @@ import { apiRoutes } from "../../Routes";
 import {
   BRAND_API_DOMAIN,
   CAR_SITE_FRONTEND_URL,
+  NODE_ENV,
   PORT,
 } from "../../Configs/Enviroment/EnvirmentVariables";
 class HttpServer {
@@ -40,7 +41,13 @@ class HttpServer {
   }
 
   listen() {
-    this.app.listen(PORT, BRAND_API_DOMAIN, () => console.log(`Listening to ${PORT}`));
+    if (NODE_ENV === "development") {
+      this.app.listen(PORT, BRAND_API_DOMAIN, () =>
+        console.log(`Listening to ${PORT}`)
+      );
+    } else {
+      this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
+    }
   }
 
   middlewares() {
