@@ -63,7 +63,7 @@ class HttpServer {
   }
 
   routes() {
-    this.app.use("/api", apiRoutes);
+    this.app.use("/brand_api", apiRoutes);
   }
 
   errorHandler() {
