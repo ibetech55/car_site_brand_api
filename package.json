@@ -1,16 +1,15 @@
 {
-  "name": "BrandsAPI",
+  "name": "car_site_brand_api",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-
   "scripts": {
-    "start": "NODE_ENV=production node build/server.js",
+    "start": "NODE_ENV=development node build/server.js",
     "start-dev": "NODE_ENV=development node build/server.js",
     "dev": "NODE_ENV=development ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:create",
     "migration-prod:run": "NODE_ENV=production ts-node ./node_modules/typeorm/cli.js migration:run -d ./src/Infra/Database/connection.ts",
-    "migration:run": "NODE_ENV=developement ts-node ./node_modules/typeorm/cli.js migration:run -d ./src/Infra/Database/connection.ts",
+    "migration:run": "NODE_ENV=development ts-node ./node_modules/typeorm/cli.js migration:run -d ./src/Infra/Database/connection.ts",
     "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d /src/Infra/Database/connection.ts",
     "build": "NODE_ENV=developement rm -rf build && npx tsc",
     "build-prod": "NODE_ENV=production rm -rf build && npx tsc"
@@ -32,7 +31,7 @@
     "jest": "^29.5.0",
     "morgan": "^1.10.0",
     "nock": "^13.3.6",
-    "pg": "^8.10.0",
+    "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",
     "supertest": "^6.3.3",

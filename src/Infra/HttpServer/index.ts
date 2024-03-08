@@ -17,7 +17,7 @@ import {
 } from "../../Configs/Enviroment/EnvirmentVariables";
 class HttpServer {
   app: express.Express;
-  private corsOrgins = [CAR_SITE_FRONTEND_URL, "http://localhost:3000"];
+  private corsOrgins = [CAR_SITE_FRONTEND_URL];
   constructor() {
     this.app = express();
     this.middlewares();
@@ -42,7 +42,7 @@ class HttpServer {
 
   listen() {
     if (NODE_ENV === "development") {
-      this.app.listen(PORT, BRAND_API_DOMAIN, () =>
+      this.app.listen(PORT, () =>
         console.log(`Listening to ${PORT}`)
       );
     } else {
@@ -84,13 +84,11 @@ class HttpServer {
       const origin = this.corsOrgins.includes(req.header('origin'))
         ? req.headers.origin
         : null;
-
       res.setHeader("Access-Control-Allow-Credentials", "true");
       res.setHeader(
         "Access-Control-Allow-Headers",
         "Content-Type, Authorization"
       );
-
       res.setHeader("Access-Control-Allow-Origin", origin);
       res.setHeader(
         "Access-Control-Allow-Methods",
