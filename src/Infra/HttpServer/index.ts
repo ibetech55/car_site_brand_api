@@ -10,9 +10,7 @@ import "../../Configs/Enviroment";
 import { AppError } from "../../ErrorHandler/AppError";
 import { apiRoutes } from "../../Routes";
 import {
-  BRAND_API_DOMAIN,
   CAR_SITE_FRONTEND_URL,
-  NODE_ENV,
   PORT,
 } from "../../Configs/Enviroment/EnvirmentVariables";
 class HttpServer {
@@ -26,7 +24,7 @@ class HttpServer {
     this.errorHandler();
     this.swaggerInit();
 
-    console.log("Connected to Http Server");
+    console.log("Connected to Http Server", PORT);
   }
 
   swaggerInit() {
@@ -41,13 +39,7 @@ class HttpServer {
   }
 
   listen() {
-    if (NODE_ENV === "development") {
-      this.app.listen(PORT, () =>
-        console.log(`Listening to ${PORT}`)
-      );
-    } else {
-      this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
-    }
+    this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
   }
 
   middlewares() {
@@ -81,7 +73,7 @@ class HttpServer {
   }
   defaultHeaders() {
     this.app.use((req, res, next) => {
-      const origin = this.corsOrgins.includes(req.header('origin'))
+      const origin = this.corsOrgins.includes(req.header("origin"))
         ? req.headers.origin
         : null;
       res.setHeader("Access-Control-Allow-Credentials", "true");
