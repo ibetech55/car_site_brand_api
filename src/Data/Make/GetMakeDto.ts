@@ -1,4 +1,4 @@
-import { Makes } from "../../Entities/makes";
+import { IGetModel } from "../Model/GetModelDtos";
 
 export interface GetMakeDto {
     id: string;
@@ -7,6 +7,7 @@ export interface GetMakeDto {
     makeLogo: string;
     active: boolean;
     createdAt: string | Date;
+    updatedAt: string | Date;
 }
 
 export interface IGetMake {
@@ -16,4 +17,5 @@ export interface IGetMake {
     make_logo?: string;
     active: boolean;
     created_at?: string | Date;
+    updated_at?: string | Date;
 }

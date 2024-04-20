@@ -3,8 +3,12 @@ import { AppDataSource } from "../../Infra/Database/connection";
 import { Makes } from "../../Entities/makes";
 import { IMakeRepository } from "./IMakeRepository";
 import { IUpdateMake } from "../../Data/Make/UpdateMakeDto";
-import { IMakePagination, IMakeOrderBy } from "../../Data/Make/MakePaginationDto";
+import {
+  IMakePagination,
+  IMakeOrderBy,
+} from "../../Data/Make/MakePaginationDto";
 import { IGetData, IPagination } from "../../Data/IPagination";
+import { CreateMakeDbDto, CreateMakeDto } from "../../Data/Make/CreateMakeDto";
 
 export class MakeRepository implements IMakeRepository {
   private readonly repository: Repository<Makes>;
@@ -31,7 +35,10 @@ export class MakeRepository implements IMakeRepository {
   }
   async getById(id: string): Promise<Makes> {
     try {
-      const data = await this.repository.findOneBy({ _id: id });
+      const data = await this.repository.findOne({
+        where: { _id: id },
+        relations: ["models"],
+      });
       return data;
     } catch (error) {
       console.log(error);
@@ -51,6 +58,7 @@ export class MakeRepository implements IMakeRepository {
       const data = await this.repository.find({
         select: ["_id", "make_name"],
         order: { make_name: "ASC" },
+        where: { active: true },
       });
       return data;
     } catch (error) {
@@ -58,20 +66,26 @@ export class MakeRepository implements IMakeRepository {
     }
   }
 
-  async find(query: IPagination<IMakePagination, IMakeOrderBy>): Promise<IGetData<Makes>> {
+  async find(
+    query: IPagination<IMakePagination, IMakeOrderBy>
+  ): Promise<IGetData<Makes>> {
     try {
-      const count = await this.repository.count({...query, skip:0, take:undefined})
+      const count = await this.repository.count({
+        ...query,
+        skip: 0,
+        take: undefined,
+      });
       const data = await this.repository.find(query);
-      return {count, data}
+      return { count, data };
     } catch (error) {
       console.log(error);
     }
   }
-  async create(data: Makes): Promise<Makes> {
+  async create(data: CreateMakeDbDto[]): Promise<boolean> {
     try {
       const createdMake = this.repository.create(data);
       const newMake = await this.repository.save(createdMake);
-      return newMake;
+      return true;
     } catch (error) {
       console.log(error);
     }

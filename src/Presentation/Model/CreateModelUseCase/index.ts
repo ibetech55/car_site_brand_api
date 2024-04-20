@@ -12,9 +12,10 @@ export class CreateModelUseCase {
 
 
     const modelData = await this._modelRepository.create({
-        model_name: values.modelName,
-        make_id: values.makeId,
-        active: true
+      model_name: values.modelName,
+      make_id: values.makeId,
+      active: true,
+      model_category_id: values.modelCategoryId
     })
 
     return modelData;

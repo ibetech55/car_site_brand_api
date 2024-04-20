@@ -7,7 +7,7 @@ servers:
   - url: http://localhost:5003
     description: Development server
 paths:
-  "/api/make":
+  "/brand_api/make":
     post:
       summary: Create a new make
       tags:
@@ -136,7 +136,7 @@ paths:
                     type: number
                   limit:
                     type: number
-  "/api/make/{id}":
+  "/brand_api/make/{id}":
     get:
       summary: Get Make by Id
       parameters:
@@ -220,7 +220,7 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/api/make/carList":
+  "/brand_api/make/carList":
     get:
       summary: Get a list of all cars
       tags:
@@ -239,7 +239,7 @@ paths:
                       type: string
                     makeName:
                       type: string
-  "/api/make/changeMakeLogo/{id}":
+  "/brand_api/make/changeMakeLogo/{id}":
     patch:
       summary: Change Make Logo
       parameters:
@@ -270,7 +270,7 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/api/make/verifyMake":
+  "/brand_api/make/verifyMake":
     patch:
       summary: Verify Make
       tags:
@@ -295,7 +295,7 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/api/make/multiples":
+  "/brand_api/make/multiples":
     post:
       summary: Create multiple models
       tags:
@@ -315,7 +315,7 @@ paths:
           description: Models created successfully
         "400":
           description: Bad request
-  "/api/model":
+  "/brand_api/model":
     post:
       summary: Create a new model
       tags:
@@ -429,7 +429,7 @@ paths:
                     type: number
                   page:
                     type: number    
-  "/api/model/{id}":
+  "/brand_api/model/{id}":
     get:
       summary: Get Model by Id
       parameters:
@@ -513,7 +513,7 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/api/model/multiples":
+  "/brand_api/model/multiples":
     post:
       summary: Create multiple models
       tags:
@@ -533,7 +533,7 @@ paths:
           description: Models created successfully
         "400":
           description: Bad request
-  "/api/model/modelsByMakeId/{makeId}":
+  "/brand_api/model/modelsByMakeId/{makeId}":
     get:
       summary: Get models by makeId
       parameters:
@@ -572,7 +572,7 @@ paths:
                       properties:
                         makeName:
                           type: string
-  "/api/model/verifyModels":
+  "/brand_api/model/verifyModels":
     patch:
       summary: Verify Models
       tags:
@@ -597,7 +597,7 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/api/version":
+  "/brand_api/version":
     get:
       summary: View all versions
       parameters:
@@ -744,7 +744,7 @@ paths:
                     type: string
         "400":
           description: Bad request
-  "/api/version/multiples":
+  "/brand_api/version/multiples":
     post:
       summary: Create multiple versions
       tags:
@@ -764,7 +764,7 @@ paths:
           description: Models created successfully
         "400":
           description: Bad request
-  "/api/version/getByModelId/{modelId}":
+  "/brand_api/version/getByModelId/{modelId}":
     get:
       summary: Get versions by modelId
       parameters:
@@ -807,7 +807,7 @@ paths:
                         type: string
                       makeId:
                         type: string 
-  "/api/version/verifyVersions":
+  "/brand_api/version/verifyVersions":
     patch:
       summary: Verify Versions
       tags:
@@ -832,7 +832,7 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/api/version/{id}":
+  "/brand_api/version/{id}":
     get:
       summary: Get Version by Id
       parameters:

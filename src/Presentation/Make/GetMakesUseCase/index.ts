@@ -1,8 +1,5 @@
 import { Between, ILike } from "typeorm";
-import {
-  GetMakeDto,
-  IGetMake,
-} from "../../../Data/Make/GetMakeDto";
+import { GetMakeDto, IGetMake } from "../../../Data/Make/GetMakeDto";
 import {
   IMakeOrderBy,
   IMakePagination,
@@ -10,7 +7,11 @@ import {
 } from "../../../Data/Make/MakePaginationDto";
 import { GetMakeMapper } from "../../../Mappers/Make/GetMakeMapper";
 import { IMakeRepository } from "../../../Repositories/Make/IMakeRepository";
-import { GetPaginationDto, IGetData, IPagination } from "../../../Data/IPagination";
+import {
+  GetPaginationDto,
+  IGetData,
+  IPagination,
+} from "../../../Data/IPagination";
 import { HandleQuery } from "../../../Utils/HandleQuery";
 import { Makes } from "../../../Entities/makes";
 

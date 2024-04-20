@@ -15,7 +15,7 @@ import {
 } from "../../Configs/Enviroment/EnvirmentVariables";
 class HttpServer {
   app: express.Express;
-  private corsOrgins = [CAR_SITE_FRONTEND_URL];
+  private corsOrgins = [CAR_SITE_FRONTEND_URL, "http://localhost:4220"];
   constructor() {
     this.app = express();
     this.middlewares();
@@ -44,7 +44,12 @@ class HttpServer {
 
   middlewares() {
     this.app.use(express.json());
-    this.app.use(expressFileUpload());
+    this.app.use(
+      expressFileUpload({
+        // useTempFiles: true, // Save uploaded files to temporary files
+        // safeFileNames: true, // Prevent overwriting existing files
+      })
+    );
     this.app.use(
       cors({
         origin: this.corsOrgins,

@@ -19,8 +19,8 @@ class Models {
   @Column()
   active: boolean;
 
-  // @Column()
-  // body_type: string;
+  @Column()
+  model_category_id: string;
 
   @ManyToOne(type => Makes, makes => makes)
   @JoinColumn({ name: 'make_id' })

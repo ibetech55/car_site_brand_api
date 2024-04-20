@@ -1,5 +1,6 @@
 export interface CreateModelDto {
     modelName:string;
+    modelCategoryId: string;
     makeId:string;
 }
 
