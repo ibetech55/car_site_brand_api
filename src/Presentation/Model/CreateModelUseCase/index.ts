@@ -14,7 +14,7 @@ export class CreateModelUseCase {
     const modelData = await this._modelRepository.create({
       model_name: values.modelName,
       make_id: values.makeId,
-      active: true,
+      active: false,
       model_category_id: values.modelCategoryId
     })
 

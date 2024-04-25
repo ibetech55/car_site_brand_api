@@ -53,12 +53,12 @@ export class MakeRepository implements IMakeRepository {
     }
   }
 
-  async getCarList(): Promise<Makes[]> {
+  async getCarList(active:string): Promise<Makes[]> {
     try {
       const data = await this.repository.find({
         select: ["_id", "make_name"],
         order: { make_name: "ASC" },
-        where: { active: true },
+        where: active === 'true' ? { active: true } : {},
       });
       return data;
     } catch (error) {

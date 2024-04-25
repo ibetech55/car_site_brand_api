@@ -1,4 +1,8 @@
-import { GetCarListDto, IGetCarList } from "../../../Data/Make/GetCarListDto";
+import {
+  GetCarListDto,
+  IGetCarList,
+  IGetCarListQuery,
+} from "../../../Data/Make/GetCarListDto";
 import { GetCarListMapper } from "../../../Mappers/Make/GetCarListMapper";
 import { IMakeRepository } from "../../../Repositories/Make/IMakeRepository";
 
@@ -11,8 +15,8 @@ export class GetCarListUseCase {
     this._mapper = mapper;
   }
 
-  async execute(): Promise<GetCarListDto[]> {
-    const data = await this._makeRepository.getCarList();
+  async execute(query?: IGetCarListQuery): Promise<GetCarListDto[]> {
+    const data = await this._makeRepository.getCarList(query.active);
     const mappedData: GetCarListDto[] = data.map((x: IGetCarList) =>
       this._mapper.map(x)
     );

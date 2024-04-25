@@ -22,7 +22,6 @@ export class GetModelsUseCase {
 
   async execute(values: ModelPaginationDto): Promise<GetPaginationDto<GetModelDto>> {
     const {skip, take} = this._handleQuery.handlePagination(values.page, values.limit)
-
     const query: IPagination<IModelPagination, IModelOrderBy> = {
       where: {
         model_name: this._handleQuery.handleILike(values?.modelName),
@@ -33,7 +32,7 @@ export class GetModelsUseCase {
       skip,
       take,
       order: {
-        model_name: values?.orderBy?.makeName,
+        model_name: values?.orderBy?.modelName,
         makes: {make_name: values?.orderBy?.makeName},
         active: values?.orderBy?.active,
         created_at: values?.orderBy?.createdAt

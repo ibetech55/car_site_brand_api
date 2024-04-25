@@ -9,7 +9,7 @@ import { Makes } from "../../Entities/makes";
 export interface IMakeRepository {
   create(data: CreateMakeDbDto[]): Promise<boolean>;
   find(query: IPagination<IMakePagination, IMakeOrderBy>): Promise<IGetData<Makes>>;
-  getCarList(): Promise<IGetCarList[]>
+  getCarList(active:string): Promise<IGetCarList[]>;
   getByMakeName(name:string): Promise<Makes>
   getById(id:string): Promise<Makes>
   delete(id: string): Promise<boolean>;
