@@ -26,6 +26,12 @@ paths:
                 makeImage:
                   type: string
                   format: binary
+                company:
+                  type: string
+                  format: binary
+                yearFounded:
+                  type: string
+                  format: binary
       responses:
         "201":
           description: Make created successfully
@@ -270,11 +276,18 @@ paths:
                 type: boolean
         "400":
           description: Bad request
-  "/brand_api/make/verifyMake":
+  "/brand_api/make/verifyMake/{type}":
     patch:
       summary: Verify Make
       tags:
         - Makes
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: Verification Type (activate, deactivate)
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -313,6 +326,10 @@ paths:
       responses:
         "201":
           description: Models created successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
         "400":
           description: Bad request
   "/brand_api/model":
@@ -330,6 +347,10 @@ paths:
                 modelName:
                   type: string
                 makeId:
+                  type: string
+                company:
+                  type: string
+                yearFounded:
                   type: string
       responses:
         "201":
@@ -531,6 +552,10 @@ paths:
       responses:
         "201":
           description: Models created successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
         "400":
           description: Bad request
   "/brand_api/model/modelsByMakeId/{makeId}":
@@ -925,3 +950,80 @@ paths:
                 type: boolean
         "400":
           description: Bad request
+  "/brand_api/model_category":
+    post:
+      summary: Create a new model category
+      tags:
+        - Model Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+      responses:
+        "201":
+          description: Model Category created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  active:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+        "400":
+          description: Bad request
+    get:
+      summary: View all model categories
+      tags:
+        - Model Category
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    active:
+                      type: boolean
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
+  "/brand_api/model_category/list":
+    get:
+      summary: View model categories list
+      tags:
+        - Model Category
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string

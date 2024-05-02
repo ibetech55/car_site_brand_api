@@ -11,6 +11,7 @@ import {
   DATABASE_PORT,
   DATABASE_USERNAME,
 } from "../../Configs/Enviroment/EnvirmentVariables";
+import { ModelCategories } from "../../Entities/model.categories.entity";
 const AppDataSource = new DataSource({
   type: "postgres",
   port: DATABASE_PORT,
@@ -20,7 +21,7 @@ const AppDataSource = new DataSource({
   host: DATABASE_HOST,
   synchronize: false,
   logging: false,
-  entities: [Makes, Models, Versions],
+  entities: [Makes, Models, Versions, ModelCategories],
   migrations: [`${__dirname}/**/Migrations/*.{ts,js}`],
   ssl: false
 });

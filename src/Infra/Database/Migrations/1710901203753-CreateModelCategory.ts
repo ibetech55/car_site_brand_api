@@ -5,7 +5,7 @@ export class CreateModelCategory1710901203753 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-              name: "model_category",
+              name: "model_categories",
               columns: [
                 {
                   name: "_id",
@@ -16,6 +16,11 @@ export class CreateModelCategory1710901203753 implements MigrationInterface {
                 {
                   name: "type",
                   type: "varchar(100)",
+                  isNullable: false,
+                },
+                {
+                  name: "active",
+                  type: "bool",
                   isNullable: false,
                 },
                 {

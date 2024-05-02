@@ -20,6 +20,12 @@ class Makes {
   @Column()
   active: boolean;
 
+  @Column()
+  year_founded: number;
+
+  @Column()
+  company: string;
+
   @OneToMany(() => Models, models => models.makes)
   @JoinColumn({ name: 'make_id' })
   models?: Models[];

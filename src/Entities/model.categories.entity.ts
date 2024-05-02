@@ -2,13 +2,16 @@ import "reflect-metadata";
 import { v4 as uuid } from "uuid";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 
-@Entity("model_category")
-class ModelCategory {
+@Entity("model_categories")
+class ModelCategories {
   @PrimaryColumn()
   _id?: string;
 
   @Column()
   type: string;
+
+  @Column()
+  active: boolean;
 
   @CreateDateColumn()
   created_at?: Date;
@@ -26,4 +29,4 @@ class ModelCategory {
   }
 }
 
-export { ModelCategory };
+export { ModelCategories };

@@ -7,7 +7,7 @@ export class VerifyMakeUseCase {
     this._repository = repository;
   }
 
-  async execute(ids: string[]): Promise<Boolean> {
+  async execute(ids: string[], type:string): Promise<Boolean> {
     for (const id of ids) {
       const makeData = await this._repository.getById(id);
       if (!makeData) {
@@ -15,7 +15,7 @@ export class VerifyMakeUseCase {
       }
     }
 
-    const data = await this._repository.verifyMakes(ids, { active: true });
+    const data = await this._repository.verifyMakes(ids, { active: type === 'activate' ? true : false });
     return data;
   }
 }

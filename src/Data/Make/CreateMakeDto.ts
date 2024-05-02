@@ -2,13 +2,17 @@ export interface CreateMakeDto {
   makeName: string;
   origin: string;
   makeImage: File;
-  imageId: string
+  imageId: string;
+  company: string;
+  yearFounded:string;
 }
 
 export interface CreateMakeDbDto {
   make_name: string;
   origin: string;
   make_logo: string;
+  year_founded: number;
+  company: string;
   active: boolean;
 }
 

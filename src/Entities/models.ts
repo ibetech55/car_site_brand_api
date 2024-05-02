@@ -22,6 +22,9 @@ class Models {
   @Column()
   model_category_id: string;
 
+  @Column()
+  year_founded: number;
+
   @ManyToOne(type => Makes, makes => makes)
   @JoinColumn({ name: 'make_id' })
   makes?: Makes

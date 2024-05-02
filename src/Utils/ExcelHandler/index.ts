@@ -4,7 +4,7 @@ import { UploadedFile } from "express-fileupload";
 export class ExcelHandler {
   constructor() {}
 
-  async uploadFile<T>(fileData: UploadedFile): Promise<T[]> {
+  async uploadFile<T>(fileData: UploadedFile): Promise<{data:T[], columns:string[]}> {
     const workbook = new ExcelJS.Workbook();
     const columnNames = [];
     const data = [];
@@ -32,6 +32,6 @@ export class ExcelHandler {
       }
     });
 
-    return data;
+    return {data, columns:columnNames};
   }
 }

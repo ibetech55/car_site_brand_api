@@ -1,5 +1,4 @@
-import { GetCarListDto, IGetCarList } from "../../../Data/Make/GetCarListDto";
-import { GetMakeDto, IGetMake } from "../../../Data/Make/GetMakeDto";
+import { GetMakeDto } from "../../../Data/Make/GetMakeDto";
 import { Makes } from "../../../Entities/makes";
 
 export class GetMakeMapper {
@@ -10,6 +9,8 @@ export class GetMakeMapper {
       origin: values.origin,
       makeLogo: values.make_logo,
       active: values.active,
+      company: values.company,
+      yearFounded: values.year_founded,
       createdAt: values.created_at,
       updatedAt: values.updated_at
     };

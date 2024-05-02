@@ -8,7 +8,7 @@ export class VerifyMakeController {
   }
 
   async handle(request: Request, response: Response) {
-    const data = await this._verifyMakeUseCase.execute(request.body.ids);
+    const data = await this._verifyMakeUseCase.execute(request.body.ids, request.params.type);
     return response.status(200).json(data);
   }
 }

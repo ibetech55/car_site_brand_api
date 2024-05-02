@@ -11,7 +11,7 @@ import { changeMakeLogoController } from "../Containers/Make/ChangeLogo";
 
 const makeRoutes = Router();
 makeRoutes.get("/make/carList", (req, res) => getCarListController.handle(req, res));
-makeRoutes.patch("/make/verifyMake", (req, res) => verifyMakeController.handle(req, res));
+makeRoutes.patch("/make/verifyMake/:type", (req, res) => verifyMakeController.handle(req, res));
 makeRoutes.patch("/make/changeMakeLogo/:id", (req, res) => changeMakeLogoController.handle(req, res));
 makeRoutes.get("/make", (req, res) => getMakesController.handle(req, res));
 makeRoutes.delete("/make/:id", (req, res) => deleteMakeController.handle(req, res));
