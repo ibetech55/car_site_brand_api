@@ -525,6 +525,12 @@ paths:
                   type: string
                 makeId:
                   type: string
+                yearFounded:
+                  type: string
+                makeId:
+                  type: string
+                active:
+                  type: boolean
       responses:
         "200":
           description: Make updated successfully

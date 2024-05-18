@@ -17,7 +17,7 @@ modelRoutes.put("/model/:id", (req, res) => updateModelController.handle(req, re
 modelRoutes.delete("/model/:id", (req, res) => deleteModelController.handle(req, res));
 modelRoutes.get("/model/modelsByMakeId/:makeId", (req, res) => getModelsByMakeIdController.handle(req, res));
 modelRoutes.post("/model/multiples", (req, res) => createMultipleModelsController.handle(req, res));
-modelRoutes.patch("/model/verifyModels", (req, res) => verifyModelsController.handle(req, res));
+modelRoutes.patch("/model/verifyModels/:type", (req, res) => verifyModelsController.handle(req, res));
 
 
 export { modelRoutes };

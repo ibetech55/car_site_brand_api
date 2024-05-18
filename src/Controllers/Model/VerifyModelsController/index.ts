@@ -8,7 +8,7 @@ export class VerifyModelsController {
   }
 
   async handle(request: Request, response: Response) {
-    const data = await this._verifyModelsUseCase.execute(request.body.ids);
+    const data = await this._verifyModelsUseCase.execute(request.body.ids, request.params.type);
     return response.status(200).json(data);
   }
 }

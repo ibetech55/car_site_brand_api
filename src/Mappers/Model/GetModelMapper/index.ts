@@ -8,6 +8,8 @@ export class GetModelMapper {
       makeId: values.make_id,
       active: values.active,
       createdAt: values.created_at,
+      updatedAt: values.updated_at,
+      yearFounded: values.year_founded,
       make: {
         makeName: values.makes.make_name
       },

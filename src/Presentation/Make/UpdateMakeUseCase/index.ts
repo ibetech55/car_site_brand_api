@@ -11,8 +11,9 @@ export class UpdateMakeUseCase {
     const data = await this._repository.updateMake(id, {
       make_name: values.makeName,
       origin: values.origin,
-      make_logo: values.makeLogo,
       active: values.active,
+      company: values.company,
+      year_founded: +values.yearFounded
     });
     return data;
   }

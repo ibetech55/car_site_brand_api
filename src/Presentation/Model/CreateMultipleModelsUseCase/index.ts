@@ -53,14 +53,11 @@ export class CreateMultipleModelsUseCase {
     if (!columns.includes("model_category")) {
       columnErrors.push(columns[2]);
     }
-    if (columnErrors.length > 0) {
-      errors.columnError = `The following columns do not exist ${JSON.stringify(
-        columnErrors
-      )}`;
+    if (columnErrors.length > 0 || columns.length !== 3) {
+      errors.columnError = `Must contain only the followning columns [model_name, make_name, model_category]`;
       throw new AppError(errors, 400);
     }
     for (let item of data) {
-      console.log(item, 111);
       const [modelData, makeData, modelCatData] = await Promise.all([
         this._modelRepository.getModelByName(item.model_name),
         this._makeRepository.getByMakeName(item.make_name),
@@ -68,7 +65,6 @@ export class CreateMultipleModelsUseCase {
           item.model_category
         ),
       ]);
-      console.log(modelData);
       if (modelData) {
         modelErrors.push(item.model_name);
       }
@@ -80,12 +76,13 @@ export class CreateMultipleModelsUseCase {
         modelCatErrors.push(item.model_category);
       }
 
-      if (!modelData && makeData && modelCatData && !columnErrors) {
+      if (!modelData && makeData && modelCatData) {
         newData.push({
           model_name: item.model_name,
           make_id: makeData._id,
           model_category_id: modelCatData._id,
           active: true,
+          year_founded: makeData.year_founded ? makeData.year_founded : undefined
         });
       }
     }
@@ -102,10 +99,15 @@ export class CreateMultipleModelsUseCase {
       )}`;
     }
 
+    if (modelCatErrors.length > 0) {
+      errors.modelCategoryError = `The following Model Categories do not exist ${JSON.stringify(
+        modelCatErrors
+      )}`;
+    }
+
     if (Object.keys(errors).length > 0) {
       throw new AppError(errors, 400);
     }
-
     await this._modelRepository.create(newData);
     return true;
   }

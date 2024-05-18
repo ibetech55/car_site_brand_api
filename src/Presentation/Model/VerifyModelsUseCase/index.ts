@@ -7,7 +7,7 @@ export class VerifyModelsUseCase {
     this._repository = repository;
   }
 
-  async execute(ids: string[]): Promise<Boolean> {
+  async execute(ids: string[], type:string): Promise<Boolean> {
     for (const id of ids) {
       const modelData = await this._repository.getById(id);
       if (!modelData) {
@@ -15,7 +15,7 @@ export class VerifyModelsUseCase {
       }
     }
 
-    const data = await this._repository.verifyModels(ids, { active: true });
+    const data = await this._repository.verifyModels(ids, { active: type === 'activate' ? true : false });
     return data;
   }
 }

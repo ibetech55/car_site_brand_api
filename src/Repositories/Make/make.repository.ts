@@ -2,13 +2,13 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../Infra/Database/connection";
 import { Makes } from "../../Entities/makes";
 import { IMakeRepository } from "./IMakeRepository";
-import { IUpdateMake } from "../../Data/Make/UpdateMakeDto";
 import {
   IMakePagination,
   IMakeOrderBy,
 } from "../../Data/Make/MakePaginationDto";
 import { IGetData, IPagination } from "../../Data/IPagination";
 import { CreateMakeDbDto, CreateMakeDto } from "../../Data/Make/CreateMakeDto";
+import { UpdateMakeDbDto } from "../../Data/Make/UpdateMakeDto";
 
 export class MakeRepository implements IMakeRepository {
   private readonly repository: Repository<Makes>;
@@ -16,7 +16,7 @@ export class MakeRepository implements IMakeRepository {
   constructor() {
     this.repository = AppDataSource.getRepository<Makes>(Makes);
   }
-  async verifyMakes(ids: string[], values: IUpdateMake): Promise<Boolean> {
+  async verifyMakes(ids: string[], values: UpdateMakeDbDto): Promise<Boolean> {
     try {
       await this.repository.update(ids, values);
       return true;
@@ -25,7 +25,7 @@ export class MakeRepository implements IMakeRepository {
     }
   }
 
-  async updateMake(id: string, values: IUpdateMake): Promise<Boolean> {
+  async updateMake(id: string, values: UpdateMakeDbDto): Promise<Boolean> {
     try {
       await this.repository.update(id, values);
       return true;
