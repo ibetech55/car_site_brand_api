@@ -3,6 +3,7 @@ import { Makes } from "../../../Entities/makes";
 import { AppError } from "../../../ErrorHandler/AppError";
 import { GetMakeMapper } from "../../../Mappers/Make/GetMakeMapper";
 import { IMakeRepository } from "../../../Repositories/Make/IMakeRepository";
+import { FileHandler } from "../../../Utils/FileHandler";
 
 export class GetMakeByIdUseCase {
   private _repository: IMakeRepository;

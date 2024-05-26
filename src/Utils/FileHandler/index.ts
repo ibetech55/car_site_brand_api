@@ -52,8 +52,7 @@ import {
     }
 
     getFileName(fileExt:string) {
-      const timestamp = Date.now().toString();
       const random = crypto.randomBytes(32).toString("hex");
-      return `${random}${timestamp}.${fileExt}`;
+      return `${random}.${fileExt}`;
     }
   }

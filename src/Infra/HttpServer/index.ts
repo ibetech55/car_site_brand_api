@@ -6,9 +6,11 @@ import swaggerUi from "swagger-ui-express";
 import path from "path";
 import expressFileUpload from "express-fileupload";
 import YAML from "yamljs";
+import csurf from "csurf";
 import "../../Configs/Enviroment";
 import { AppError } from "../../ErrorHandler/AppError";
 import { apiRoutes } from "../../Routes";
+import cookieParser from "cookie-parser";
 import {
   CAR_SITE_FRONTEND_URL,
   PORT,
@@ -19,6 +21,7 @@ class HttpServer {
   constructor() {
     this.app = express();
     this.middlewares();
+
     this.defaultHeaders();
     this.routes();
     this.errorHandler();
@@ -42,8 +45,20 @@ class HttpServer {
     this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
   }
 
+  handleCsurf() {
+    const csrfProtection = csurf({ cookie: true });
+    this.app.use(csrfProtection);
+    // this.app.use((req, res, next) => {
+    //   res.locals.csrfToken = req.csrfToken();
+    //   next();
+    // });
+  }
+
   middlewares() {
     this.app.use(express.json());
+
+    this.app.use(cookieParser());
+
     this.app.use(
       expressFileUpload({
         // useTempFiles: true, // Save uploaded files to temporary files
@@ -81,6 +96,9 @@ class HttpServer {
       const origin = this.corsOrgins.includes(req.header("origin"))
         ? req.headers.origin
         : null;
+      // if (!origin) {
+      //   throw new AppError("Unauthrized", 403);
+      // }
       res.setHeader("Access-Control-Allow-Credentials", "true");
       res.setHeader(
         "Access-Control-Allow-Headers",

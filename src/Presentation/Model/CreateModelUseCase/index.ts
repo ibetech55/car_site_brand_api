@@ -20,7 +20,7 @@ export class CreateModelUseCase {
       const checkName = await this._modelRepository.getModelByName(
         model.modelName
       );
-      if (checkName && checkName.make_id === model.makeId) {
+      if (checkName) {
         nameErrors.push(checkName.model_name);
       } else {
         newData.push({
@@ -35,9 +35,12 @@ export class CreateModelUseCase {
 
     if (nameErrors.length > 0) {
       throw new AppError(
-        `The following model names ${JSON.stringify(
-          nameErrors
-        )} already exist, please try agian`,
+        {
+          text: `The following model names ${JSON.stringify(
+            nameErrors
+          )} already exist, please try agian`,
+          models: nameErrors,
+        },
         400
       );
     }

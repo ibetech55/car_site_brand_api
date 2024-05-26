@@ -8,6 +8,7 @@ import { deleteMakeController } from "../Containers/Make/DeleteMake";
 import { updateMakeController } from "../Containers/Make/UpdateMake";
 import { verifyMakeController } from "../Containers/Make/VerifyMake";
 import { changeMakeLogoController } from "../Containers/Make/ChangeLogo";
+import { getMakeLogoController } from "../Containers/Make/GetMakeLogo";
 
 const makeRoutes = Router();
 makeRoutes.get("/make/carList", (req, res) => getCarListController.handle(req, res));
@@ -19,5 +20,6 @@ makeRoutes.put("/make/:id", (req, res) => updateMakeController.handle(req, res))
 makeRoutes.get("/make/:id", (req, res) => getMakeByIdController.handle(req, res));
 makeRoutes.post("/make", (req, res) => createMakeController.handle(req, res));
 makeRoutes.post("/make/multiples", (req, res) => createMultipleMakesController.handle(req, res));
+makeRoutes.get("/make/get-make-logo/:id", (req, res) => getMakeLogoController.handle(req, res));
 
 export { makeRoutes };

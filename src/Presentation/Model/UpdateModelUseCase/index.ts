@@ -27,7 +27,7 @@ export class UpdateModelUseCase {
     }
 
     if (!checkModel) throw new AppError(`Model does not exists`, 400);
-    if (checkModelName && checkModel.model_name !== values.modelName)
+    if (checkModelName && checkModelName._id !== id)
       throw new AppError(
         `Model ${checkModelName.model_name} already exists`,
         400

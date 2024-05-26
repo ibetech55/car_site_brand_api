@@ -2,7 +2,6 @@ import { FileArray, UploadedFile } from "express-fileupload";
 import { AppError } from "../../../ErrorHandler/AppError";
 import { FileHandler } from "../../../Utils/FileHandler";
 import { IMakeRepository } from "../../../Repositories/Make/IMakeRepository";
-import { IUpdateMake, UpdateMakeDto } from "../../../Data/Make/UpdateMakeDto";
 
 export class ChangeMakeLogoUseCase {
   private _repository: IMakeRepository;
