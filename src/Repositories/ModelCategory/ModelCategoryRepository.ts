@@ -3,6 +3,7 @@ import { CreateModelCategoryDbDto } from "../../Data/ModelCategory/CreateModelCa
 import { ModelCategories } from "../../Entities/model.categories.entity";
 import { IModelCategoryRepository } from "./IModelCategoryRepository";
 import { AppDataSource } from "../../Infra/Database/connection";
+import { UpdateModelCategoryDtoDb } from "../../Data/ModelCategory/UpdateModelCategory";
 
 export class ModelCategoryRepository implements IModelCategoryRepository {
   private readonly _repository: Repository<ModelCategories>;
@@ -11,9 +12,32 @@ export class ModelCategoryRepository implements IModelCategoryRepository {
     this._repository =
       AppDataSource.getRepository<ModelCategories>(ModelCategories);
   }
-  getByModelCategoryType(type: string): Promise<ModelCategories> {
+  async findById(id: string): Promise<ModelCategories> {
     try {
-      return this._repository.findOneBy({ type:type });
+      return await this._repository.findOneBy({ _id: id });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async delete(id: string): Promise<boolean> {
+    try {
+      await this._repository.delete(id);
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async update(id: string, values: UpdateModelCategoryDtoDb): Promise<boolean> {
+    try {
+      await this._repository.update(id, values);
+      return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async getByModelCategoryType(type: string): Promise<ModelCategories> {
+    try {
+      return await this._repository.findOneBy({ type: type });
     } catch (error) {
       console.log(error);
     }

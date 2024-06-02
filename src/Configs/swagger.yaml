@@ -1014,6 +1014,87 @@ paths:
                       type: string
                     updatedAt:
                       type: string
+  "/brand_api/model_category/{id}":
+    get:
+      summary: Get Model Category by Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Model Category Id
+          schema:
+            type: string
+      tags:
+        - Versions
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  active:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+    put:
+      summary: Update Model Category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Model Category Id
+          schema:
+            type: string
+      tags:
+        - Model Category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                active:
+                  type: boolean
+      responses:
+        "200":
+          description: Model Category updated successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
+    delete:
+      summary: Delete Make Category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Make Id
+          schema:
+            type: string
+      tags:
+        - Model Category
+      responses:
+        "200":
+          description: Deleted successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+        "400":
+          description: Bad request
   "/brand_api/model_category/list":
     get:
       summary: View model categories list

@@ -26,7 +26,6 @@ class HttpServer {
     this.routes();
     this.errorHandler();
     this.swaggerInit();
-
     console.log("Connected to Http Server", PORT);
   }
 
