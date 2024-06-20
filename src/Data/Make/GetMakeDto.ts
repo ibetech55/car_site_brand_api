@@ -7,7 +7,7 @@ export interface GetMakeDto {
   company: string;
   yearFounded: number;
   createdAt: string | Date;
-  updatedAt: string | Date;
+  updatedAt: Date;
 }
 
 export interface IGetMake {
@@ -17,7 +17,7 @@ export interface IGetMake {
   make_logo?: string;
   active: boolean;
   company: string;
-  year_founded: string;
+  year_founded: number;
   created_at?: string | Date;
-  updated_at?: string | Date;
+  updated_at?: Date;
 }

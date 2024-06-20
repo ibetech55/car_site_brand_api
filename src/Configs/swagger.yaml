@@ -142,7 +142,7 @@ paths:
                     type: number
                   limit:
                     type: number
-  "/brand_api/make/{id}":
+  "/brand_api/make/getById/{id}":
     get:
       summary: Get Make by Id
       parameters:
@@ -332,6 +332,14 @@ paths:
                 type: boolean
         "400":
           description: Bad request
+  "/brand_api/make/create-makes-template":
+    get:
+      summary: Download create makes template
+      tags:
+        - Makes
+      responses:
+        "200":
+          description: "Successful response"
   "/brand_api/model":
     post:
       summary: Create a new model
@@ -450,7 +458,7 @@ paths:
                     type: number
                   page:
                     type: number    
-  "/brand_api/model/{id}":
+  "/brand_api/model/getById/{id}":
     get:
       summary: Get Model by Id
       parameters:
@@ -540,6 +548,14 @@ paths:
                 type: boolean
         "400":
           description: Bad request
+    "/brand_api/make/create-makes-template":
+    get:
+      summary: Download create makes template
+      tags:
+        - Makes
+      responses:
+        "200":
+          description: "Successful response"
   "/brand_api/model/multiples":
     post:
       summary: Create multiple models
@@ -628,6 +644,14 @@ paths:
                 type: boolean
         "400":
           description: Bad request
+  "/brand_api/model/createModelsTemplate":
+    get:
+      summary: Download create models template
+      tags:
+        - Models
+      responses:
+        "200":
+          description: "Successful response"
   "/brand_api/version":
     get:
       summary: View all versions

@@ -2,7 +2,7 @@ import { IGetData, IPagination } from "../../Data/IPagination";
 import { CreateMakeDbDto, CreateMakeDto } from "../../Data/Make/CreateMakeDto";
 import { IGetCarList } from "../../Data/Make/GetCarListDto";
 import { IMakeOrderBy, IMakePagination } from "../../Data/Make/MakePaginationDto";
-import { IUpdateMake } from "../../Data/Make/UpdateMakeDto";
+import { UpdateMakeDbDto } from "../../Data/Make/UpdateMakeDto";
 import { Makes } from "../../Entities/makes";
 
 
@@ -13,6 +13,6 @@ export interface IMakeRepository {
   getByMakeName(name:string): Promise<Makes>
   getById(id:string): Promise<Makes>
   delete(id: string): Promise<boolean>;
-  updateMake(id: string, data: IUpdateMake): Promise<Boolean>;
-  verifyMakes(id:string[], values: IUpdateMake): Promise<Boolean>
+  updateMake(id: string, data: UpdateMakeDbDto): Promise<Boolean>;
+  verifyMakes(id:string[], values: UpdateMakeDbDto): Promise<Boolean>
 }

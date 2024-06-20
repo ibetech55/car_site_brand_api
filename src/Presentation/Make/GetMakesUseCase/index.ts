@@ -49,7 +49,7 @@ export class GetMakesUseCase {
       take,
       skip,
       order: {
-        make_name: values?.orderBy?.makeName,
+        make_name: 'ASC',
         created_at: values?.orderBy?.createdAt,
         origin: values?.orderBy?.origin,
       },

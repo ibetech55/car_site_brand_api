@@ -44,15 +44,6 @@ class HttpServer {
     this.app.listen(PORT, () => console.log(`Listening to ${PORT}`));
   }
 
-  handleCsurf() {
-    const csrfProtection = csurf({ cookie: true });
-    this.app.use(csrfProtection);
-    // this.app.use((req, res, next) => {
-    //   res.locals.csrfToken = req.csrfToken();
-    //   next();
-    // });
-  }
-
   middlewares() {
     this.app.use(express.json());
 
