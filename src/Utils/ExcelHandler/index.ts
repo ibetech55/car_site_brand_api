@@ -18,8 +18,7 @@ export class ExcelHandler {
       headerRow.eachCell((cell) => {
         columnNames.push(cell.value);
       });
-
-      for (let rowNum = 2; rowNum <= worksheet.rowCount; rowNum++) {
+      for (let rowNum = 2; rowNum <= worksheet.actualRowCount; rowNum++) {
         const row = worksheet.getRow(rowNum);
         const rowData = {};
 

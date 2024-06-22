@@ -22,4 +22,5 @@ export interface IModelExcelDto {
   model_name: string;
   make_name: string;
   model_category: string;
+  year_founded: string;
 }

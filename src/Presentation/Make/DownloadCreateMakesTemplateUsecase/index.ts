@@ -9,8 +9,10 @@ export class DownloadCreateMakesTemplateUseCase {
     const worksheet = workbook.addWorksheet("CreateMakesTemplate");
 
     worksheet.columns = [
-      { header: "make_name", key: "make_name" },
-      { header: "origin", key: "origin" },
+      { header: "make_name", key: "make_name", width:25 },
+      { header: "origin", key: "origin", width:25  },
+      { header: "company", key: "company", width:25  },
+      { header: "year_founded", key: "year_founded", width:25  },
     ];
 
     res.setHeader(

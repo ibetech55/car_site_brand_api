@@ -82,7 +82,7 @@ export class ModelRepository implements IModelRepository {
   async getModelsByMakeId(makeId: string): Promise<Models[]> {
     try {
       const data = await this.repository.find({
-        where: [{ make_id: makeId }],
+        where: [{ make_id: makeId, active: true }],
         relations: ["makes"],
         order: { model_name: "ASC" },
         select: { makes: { make_name: true } },

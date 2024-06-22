@@ -24,4 +24,6 @@ export interface CreateMultipleMakesDto {
 export interface IMakeExcelDto {
   make_name: string;
   origin: string;
+  company: string;
+  year_founded: string;
 }

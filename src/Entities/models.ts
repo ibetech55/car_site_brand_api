@@ -34,7 +34,7 @@ class Models {
   versions?: Versions[];
 
   @CreateDateColumn()
-  created_at?: Date | string;
+  created_at: Date | string;
 
 
   @UpdateDateColumn()

@@ -9,9 +9,10 @@ export class DownloadCreateModelsTemplateUseCase {
     const worksheet = workbook.addWorksheet("CreateModelsTemplate");
 
     worksheet.columns = [
-      { header: "model_name", key: "model_name", width: 10 },
-      { header: "make_name", key: "make_name", width: 10 },
-      { header: "model_category", key: "model_category", width: 10 },
+      { header: "model_name", key: "model_name", width: 25 },
+      { header: "year_founded", key: "year_founded", width: 25 },
+      { header: "make_name", key: "make_name", width: 25 },
+      { header: "model_category", key: "model_category", width: 25 },
     ];
 
     res.setHeader(

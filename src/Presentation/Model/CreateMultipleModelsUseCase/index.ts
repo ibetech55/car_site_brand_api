@@ -47,16 +47,20 @@ export class CreateMultipleModelsUseCase {
     if (!columns.includes("model_name")) {
       columnErrors.push(columns[0]);
     }
-    if (!columns.includes("make_name")) {
+    if (!columns.includes("year_founded")) {
       columnErrors.push(columns[1]);
     }
-    if (!columns.includes("model_category")) {
+    if (!columns.includes("make_name")) {
       columnErrors.push(columns[2]);
     }
-    if (columnErrors.length > 0 || columns.length !== 3) {
-      errors.columnError = `Must contain only the followning columns [model_name, make_name, model_category]`;
+    if (!columns.includes("model_category")) {
+      columnErrors.push(columns[3]);
+    }
+    if (columnErrors.length > 0 || columns.length !== 4) {
+      errors.columnError = `Must contain only the followning columns [model_name, year_founded, make_name, model_category]`;
       throw new AppError(errors, 400);
     }
+console.log(data)
     for (let item of data) {
       const [modelData, makeData, modelCatData] = await Promise.all([
         this._modelRepository.getModelByName(item.model_name),
@@ -81,7 +85,7 @@ export class CreateMultipleModelsUseCase {
           model_name: item.model_name,
           make_id: makeData._id,
           model_category_id: modelCatData._id,
-          active: true,
+          active: false,
           year_founded: makeData.year_founded ? makeData.year_founded : undefined
         });
       }

@@ -6,7 +6,8 @@ export interface GetModelsByMakeIdDto {
     modelName:string;
     makeId: string;
     active: boolean;
-    makes?: {makeName: string}
+    makes?: {makeName: string},
+    createdAt: string | Date
 }
 
 export interface IGetModelsByMakeId {
@@ -14,5 +15,6 @@ export interface IGetModelsByMakeId {
     model_name: string;
     make_id: string;
     active: boolean;
-    makes?: IGetMake
+    makes?: IGetMake,
+    created_at: string | Date
 }

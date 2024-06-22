@@ -21,14 +21,22 @@ export class CreateMultipleMakesUseCase {
     const errorMakeNames: string[] = [];
     let fileData: UploadedFile;
     fileData = file.fileData as UploadedFile;
-    const { data, columns } = await this._excelHandler.uploadFile<IMakeExcelDto>(
-      fileData
-    );
+    const { data, columns } =
+      await this._excelHandler.uploadFile<IMakeExcelDto>(fileData);
 
-    if(!columns.includes('make_name') || !columns.includes('origin') || columns.length > 2){
-      throw new AppError(`The following columns must only be included [make_name, origin]`, 400)
+    if (
+      !columns.includes("make_name") ||
+      !columns.includes("origin") ||
+      !columns.includes("company") ||
+      !columns.includes("year_founded") ||
+      columns.length > 4
+    ) {
+      throw new AppError(
+        `The following columns must only be included [make_name, origin, company, year_founded]`,
+        400
+      );
     }
-    
+
     for (let make of data) {
       const checkName = await this._makeRepository.getByMakeName(
         make.make_name
@@ -41,9 +49,9 @@ export class CreateMultipleMakesUseCase {
           make_name: make.make_name,
           origin: make.origin,
           active: false,
-          company: '',
-          year_founded: 0,
-          make_logo: ''
+          company: make.company,
+          year_founded: +make.year_founded,
+          make_logo: "",
         });
       }
     }
