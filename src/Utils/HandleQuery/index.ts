@@ -4,12 +4,17 @@ export class HandleQuery {
   constructor() {}
 
   handleBetweenDates(startDate: string, endDate: string): FindOperator<string> {
-    return startDate && endDate
+    try {
+      return startDate && endDate
       ? Between(
           new Date(`${startDate}T00:00:00.000Z`).toISOString(),
           new Date(`${endDate}T23:59:59.999Z`).toISOString()
         )
       : undefined;
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   handleILike(text: string): FindOperator<string> {
