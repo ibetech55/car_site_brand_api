@@ -36,6 +36,12 @@ export class GetMakesUseCase {
       values.page,
       values.limit
     );
+    const orderByFields = [
+      { field: "make_name", name: "makeName" },
+      { field: "origin", name: "origin" },
+      { field: "created_at", name: "createdAt" },
+      { field: "active", name: "active" },
+    ];
     const query: IPagination<IMakePagination, IMakeOrderBy> = {
       where: {
         make_name: this._handleQuery.handleILike(values.makeName),
@@ -48,11 +54,7 @@ export class GetMakesUseCase {
       },
       take,
       skip,
-      order: {
-        created_at: values?.orderBy?.createdAt,
-        make_name: values?.orderBy?.makeName,
-        origin: values?.orderBy?.origin,
-      },
+      order: this._handleQuery.handleOrderBy(values.orderBy, orderByFields),
     };
     const makesData: IGetData<Makes> = await this._repository.find(query);
     const mappedData: GetMakeDto[] = makesData.data.map((x: IGetMake) =>

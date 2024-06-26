@@ -97,18 +97,6 @@ paths:
               orderBy:
                 type: object
                 properties:
-                  makeName:
-                    type: string
-                    description: "Order by make name"
-                  origin:
-                    type: string
-                    description: "Order by origin"
-                  active:
-                    type: boolean
-                    description: "Order by active"
-                  createdAt:
-                    type: string
-                    description: "Order By created at"
       tags:
         - Makes
       responses:
