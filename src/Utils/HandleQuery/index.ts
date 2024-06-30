@@ -1,7 +1,8 @@
 import { Between, FindOperator, ILike } from "typeorm";
 export interface IFieldData {
-  name:string,
+  name: string;
   field: string;
+  field2?: string;
 }
 export class HandleQuery {
   constructor() {}
@@ -30,15 +31,22 @@ export class HandleQuery {
     };
   }
 
-  handleOrderBy<T>(values:T, field:IFieldData[]) {
+  handleOrderBy<T, P>(values: T, field: IFieldData[]): P {
     let orderByData = {};
-
     if (values) {
       Object.keys(values).map((key) => {
-        const fieldData = field.find((f:IFieldData) => f.name === key);
-        orderByData[fieldData.field] = values[key];
+        const fieldData = field.find((f: IFieldData) => f.name === key);
+        try {
+          if (!fieldData.hasOwnProperty('field2')) {
+            orderByData[fieldData.field] = values[key];
+          } else {
+            orderByData[fieldData.field] = { [fieldData.field2]: values[key] };
+          }
+        } catch (error) {
+          console.log(error);
+        }
       });
-      return orderByData;
+      return orderByData as P;
     }
     return undefined;
   }
