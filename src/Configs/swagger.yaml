@@ -707,6 +707,89 @@ paths:
       responses:
         "200":
           description: "Successful response"
+  "/brand_api/model/export-models-data/{exportType}":
+    post:
+      summary: Export Models data to spreadsheet
+      parameters:
+        - name: exportType
+          in: path
+          required: true
+          description: Export Types (exportAll, paginate)
+          schema:
+            type: string
+        - name: modelName
+          in: query
+          description: "Model Name"
+          required: false
+        - name: makeName
+          in: query
+          description: "Make Name"
+          required: false
+        - name: active
+          in: query
+          description: "Active"
+          required: false
+        - name: page
+          in: query
+          description: "Page"
+          required: false
+        - name: limit
+          in: query
+          description: "Limit"
+          required: false
+        - name: startDate
+          in: query
+          description: "Start Date (YYYY-MM-DD)"
+          required: false
+        - name: endDate
+          in: query
+          description: "End Date (YYYY-MM-DD)"
+          required: false
+        - name: active
+          in: query
+          description: "Active"
+          required: false
+        - name: orderBy
+          in: query
+          description: "Order By"
+          required: false
+          schema:
+            type: object
+            properties:
+              orderBy:
+                type: object
+                properties:
+                  modelName:
+                    type: string
+                    description: "Order by Model Name (asc | ASC | desc | DESC)"
+                  makeName:
+                    type: string
+                    description: "Order by make name (asc | ASC | desc | DESC)"
+                  active:
+                    type: string
+                    description: "Order by active (asc | ASC | desc | DESC)"
+                  createdAt:
+                    type: string
+                    description: "Order By created at (asc | ASC | desc | DESC)"
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columns:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+      responses:
+        "200":
+          description: "Successful response"
   "/brand_api/version":
     get:
       summary: View all versions

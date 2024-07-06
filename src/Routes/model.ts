@@ -8,6 +8,7 @@ import { getModelByIdController } from "../Containers/Model/GetModelById";
 import { deleteModelController } from "../Containers/Model/DeleteModel";
 import { updateModelController } from "../Containers/Model/UpdateModel";
 import { downloadCreateModelsTemplateController } from "../Containers/Model/DownloadCreateModelsTemplate";
+import { exportModelsSpreadsheetController } from "../Containers/Model/ExportModelsSpreadsheet";
 
 const modelRoutes = Router();
 
@@ -20,5 +21,6 @@ modelRoutes.get("/model/modelsByMakeId/:makeId", (req, res) => getModelsByMakeId
 modelRoutes.post("/model/multiples", (req, res) => createMultipleModelsController.handle(req, res));
 modelRoutes.patch("/model/verifyModels/:type", (req, res) => verifyModelsController.handle(req, res));
 modelRoutes.get("/model/createModelsTemplate", (req, res) => downloadCreateModelsTemplateController.handle(req, res));
+modelRoutes.post("/model/export-models-data/:exportType", (req, res) => exportModelsSpreadsheetController.handle(req, res));
 
 export { modelRoutes };
