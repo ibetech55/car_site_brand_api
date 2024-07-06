@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { FindOptionsSelect, FindOptionsSelectByString, Repository } from "typeorm";
 import { AppDataSource } from "../../Infra/Database/connection";
 import { Makes } from "../../Entities/makes";
 import { IMakeRepository } from "./IMakeRepository";
@@ -53,12 +53,12 @@ export class MakeRepository implements IMakeRepository {
     }
   }
 
-  async getCarList(active:string): Promise<Makes[]> {
+  async getCarList(active: string): Promise<Makes[]> {
     try {
       const data = await this.repository.find({
         select: ["_id", "make_name"],
         order: { make_name: "ASC" },
-        where: active === 'true' ? { active: true } : {},
+        where: active === "true" ? { active: true } : {},
       });
       return data;
     } catch (error) {
@@ -96,6 +96,26 @@ export class MakeRepository implements IMakeRepository {
       await this.repository.update(id, { active: false });
       await this.repository.softDelete(id);
       return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async export(
+    columns:string[],
+    query: IPagination<IMakePagination, IMakeOrderBy>
+  ): Promise<IGetData<Makes>> {
+    try {
+      const count = await this.repository.count({
+        ...query,
+        skip: 0,
+        take: undefined,
+      });
+      const data = await this.repository.find({
+        ...query,
+        select:columns as FindOptionsSelect<Makes>
+      });
+      return { count, data };
     } catch (error) {
       console.log(error);
     }

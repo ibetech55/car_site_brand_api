@@ -36,11 +36,11 @@ export class GetModelsUseCase {
       values.limit
     );
     const orderByFields = [
-      { field: "model_name", name: "modelName" },
-      { field: "makes", name: "makes", field2: "make_name" },
-      { field: "origin", name: "origin" },
-      { field: "created_at", name: "createdAt" },
-      { field: "active", name: "status" },
+      { field: "model_name", key: "modelName" },
+      { field: "makes", key: "makes", field2: "make_name" },
+      { field: "origin", key: "origin" },
+      { field: "created_at", key: "createdAt" },
+      { field: "active", key: "status" },
     ];
     const query: IPagination<IModelPagination, IModelOrderBy> = {
       where: {

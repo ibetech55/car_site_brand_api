@@ -328,6 +328,73 @@ paths:
       responses:
         "200":
           description: "Successful response"
+  "/brand_api/make/export-makes-data/{exportType}":
+    post:
+      summary: Export Makes data to spreadsheet
+      tags:
+        - Makes
+      parameters:
+        - name: exportType
+          in: path
+          required: true
+          description: Export Types (exportAll, paginate)
+          schema:
+            type: string
+        - name: makeName
+          in: query
+          description: "Make Name"
+          required: false
+        - name: origin
+          in: query
+          description: "Origin"
+          required: false
+        - name: createdAt
+          in: query
+          description: "Created At"
+          required: false
+        - name: page
+          in: query
+          description: "Page"
+          required: false
+        - name: limit
+          in: query
+          description: "Limit"
+          required: false
+        - name: startDate
+          in: query
+          description: "Start Date (YYYY-MM-DD)"
+          required: false
+        - name: endDate
+          in: query
+          description: "End Date (YYYY-MM-DD)"
+          required: false
+        - name: orderBy
+          in: query
+          description: "Order By"
+          required: false
+          schema:
+            type: object
+            properties:
+              orderBy:
+                type: object
+                properties:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columns:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      key:
+                        type: string
+      responses:
+        "200":
+          description: "Successful response"
   "/brand_api/model":
     post:
       summary: Create a new model
