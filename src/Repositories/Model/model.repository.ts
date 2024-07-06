@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { FindOptionsSelect, Repository } from "typeorm";
 import { AppDataSource } from "../../Infra/Database/connection";
 import { IModelRepository } from "./IModelRepository";
 import { Models } from "../../Entities/models";
@@ -9,6 +9,7 @@ import {
   IModelOrderBy,
 } from "../../Data/Model/ModelPaginationDto";
 import { CreateModelDbDto } from "../../Data/Model/CreateModelDtos";
+import { IMakePagination } from "../../Data/Make/MakePaginationDto";
 
 export class ModelRepository implements IModelRepository {
   private readonly repository: Repository<Models>;
@@ -97,6 +98,28 @@ export class ModelRepository implements IModelRepository {
       const createdModel = this.repository.create(data);
       await this.repository.save(createdModel);
       return true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  async export<T>(
+    columns:T,
+    query: IPagination<IMakePagination, IModelOrderBy>
+  ): Promise<IGetData<Models>> {
+    try {
+      const count = await this.repository.count({
+        ...query,
+        skip: 0,
+        take: undefined,
+      });
+      const data = await this.repository.find({
+        ...query,
+        relations: ["makes"],
+        select:columns
+      });
+      return { count, data };
     } catch (error) {
       console.log(error);
     }

@@ -101,8 +101,8 @@ export class MakeRepository implements IMakeRepository {
     }
   }
 
-  async export(
-    columns:string[],
+  async export<T>(
+    columns:T,
     query: IPagination<IMakePagination, IMakeOrderBy>
   ): Promise<IGetData<Makes>> {
     try {

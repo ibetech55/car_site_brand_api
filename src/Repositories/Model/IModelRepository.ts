@@ -14,4 +14,8 @@ export interface IModelRepository {
   getById(id: string): Promise<Models>
   delete(id: string): Promise<boolean>;
   update(id: string, data: IUpdateModel): Promise<Boolean>;
+  export<T>(
+    columns:T,
+    query: IPagination<IModelPagination, IModelOrderBy>
+  ): Promise<IGetData<Models>> 
 }

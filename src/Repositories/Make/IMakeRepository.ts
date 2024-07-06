@@ -16,8 +16,8 @@ export interface IMakeRepository {
   delete(id: string): Promise<boolean>;
   updateMake(id: string, data: UpdateMakeDbDto): Promise<Boolean>;
   verifyMakes(id:string[], values: UpdateMakeDbDto): Promise<Boolean>;
-  export(
-    columns:string[],
+  export<T>(
+    columns:T,
     query: IPagination<IMakePagination, IMakeOrderBy>
   ): Promise<IGetData<Makes>> 
 }
