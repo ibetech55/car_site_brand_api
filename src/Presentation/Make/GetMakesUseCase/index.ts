@@ -36,11 +36,12 @@ export class GetMakesUseCase {
       values.limit
     );
     const orderByFields = [
-      { field: "make_name", name: "makeName" },
-      { field: "origin", name: "origin" },
-      { field: "created_at", name: "createdAt" },
-      { field: "active", name: "active" },
+      { field: "make_name", key: "makeName" },
+      { field: "origin", key: "origin" },
+      { field: "created_at", key: "createdAt" },
+      { field: "active", key: "active" },
     ];
+
     const query: IPagination<IMakePagination, IMakeOrderBy> = {
       where: {
         make_name: this._handleQuery.handleILike(values.makeName),
