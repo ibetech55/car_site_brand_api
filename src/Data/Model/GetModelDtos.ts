@@ -9,15 +9,17 @@ export interface GetModelDto {
   updatedAt: string | Date;
   yearFounded: number;
   make: { makeName: string };
+  bodyType: string;
 }
 
 export interface IGetModel {
-    _id?: string;
-    model_name: string;
-    make_id: string;
-    active: boolean;
-    created_at?: string | Date;
-    updated_at?: string | Date;
-    year_founded: number;
-    makes?: { make_name: string };
+  _id?: string;
+  model_name: string;
+  make_id: string;
+  active: boolean;
+  created_at?: string | Date;
+  updated_at?: string | Date;
+  year_founded: number;
+  makes?: { make_name: string };
+  body_type: string
 }

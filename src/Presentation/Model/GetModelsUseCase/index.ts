@@ -1,3 +1,4 @@
+import { And, Equal, Or } from "typeorm";
 import {
   GetPaginationDto,
   IGetData,
@@ -35,6 +36,7 @@ export class GetModelsUseCase {
       values.page,
       values.limit
     );
+
     const orderByFields = [
       { field: "model_name", key: "modelName" },
       { field: "makes", key: "makes", field2: "make_name" },
@@ -44,6 +46,7 @@ export class GetModelsUseCase {
     ];
     const query: IPagination<IModelPagination, IModelOrderBy> = {
       where: {
+        body_type: values.bodyType ? this._handleQuery.handleOR(values.bodyType) : undefined,
         model_name: this._handleQuery.handleILike(values?.modelName),
         created_at: this._handleQuery.handleBetweenDates(
           values?.startDate,

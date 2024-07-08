@@ -1,4 +1,4 @@
-import { UpdateModelDto } from "../../../Data/Model/UpdateModelDtos";
+import { IUpdateModel, UpdateModelDto } from "../../../Data/Model/UpdateModelDtos";
 import { Makes } from "../../../Entities/makes";
 import { Models } from "../../../Entities/models";
 import { AppError } from "../../../ErrorHandler/AppError";
@@ -12,6 +12,7 @@ export class UpdateModelUseCase {
   ) {}
 
   async execute(id: string, values: UpdateModelDto) {
+    console.log(values, 666)
     let checkModelName: Models;
     let checkMake: Makes;
     const checkModel = await this._modelRepository.getById(id);
@@ -34,12 +35,14 @@ export class UpdateModelUseCase {
       );
     if (!checkMake && values.makeId) throw new AppError(`Make does not exist exists`, 400);
 
-    const data = await this._modelRepository.update(id, {
-      model_name: values.modelName  ? values.modelName : checkModel.model_name,
-      make_id: values.makeId ? values.makeId : checkModel.make_id,
-      active: values.hasOwnProperty('active') ? values.active : checkModel.active,
-      year_founded: values.yearFounded ? +values.yearFounded : checkModel.year_founded
-    });
+    const updateData:IUpdateModel = {
+    model_name: values.modelName  ? values.modelName : checkModel.model_name,
+    make_id: values.makeId ? values.makeId : checkModel.make_id,
+    active: values.hasOwnProperty('active') ? values.active : checkModel.active,
+    year_founded: values.yearFounded ? +values.yearFounded : checkModel.year_founded,
+    body_type: values.bodyType ? values.bodyType.join(',') : checkModel.body_type
+  }
+    const data = await this._modelRepository.update(id, updateData);
     return data;
   }
 }

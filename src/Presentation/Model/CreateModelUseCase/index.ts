@@ -13,10 +13,15 @@ export class CreateModelUseCase {
   }
 
   async execute(values: CreateModelDto[]) {
+    console.log(values)
     const nameErrors = [];
     const newData: CreateModelDbDto[] = [];
-
     for (let model of values) {
+      const getBodyTypes = [];
+      model.bodyType.forEach(bt=>{
+        getBodyTypes.push(bt)
+      })
+
       const checkName = await this._modelRepository.getModelByName(
         model.modelName
       );
@@ -26,8 +31,8 @@ export class CreateModelUseCase {
         newData.push({
           model_name: model.modelName,
           make_id: model.makeId,
-          active: true,
-          model_category_id: model.modelCategoryId,
+          active: false,
+          body_type: getBodyTypes.join(','),
           year_founded: model.yearFounded,
         });
       }
@@ -44,7 +49,6 @@ export class CreateModelUseCase {
         400
       );
     }
-
     const modelData = await this._modelRepository.create(newData);
 
     return modelData;

@@ -3,11 +3,13 @@ export interface UpdateModelDto {
   makeId?: string;
   active?: boolean;
   yearFounded?: string;
+  bodyType?: string[];
 }
 
 export interface IUpdateModel {
   model_name?: string;
   make_id?: string;
   active?: boolean;
-  year_founded?: number
+  year_founded?: number;
+  body_type?: string;
 }

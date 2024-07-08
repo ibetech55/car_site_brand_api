@@ -1,6 +1,8 @@
+import { GetModelCategoryListDto } from "../ModelCategory/GetModelCategory";
+
 export interface CreateModelDto {
   modelName: string;
-  modelCategoryId: string;
+  bodyType: string[];
   makeId: string;
   yearFounded: number;
 }
@@ -8,7 +10,7 @@ export interface CreateModelDto {
 export interface CreateModelDbDto {
   model_name: string;
   make_id: string;
-  model_category_id: string;
+  body_type: string;
   year_founded: number;
   active:boolean;
 }
@@ -21,6 +23,6 @@ export interface CreateMultipleModelsDto {
 export interface IModelExcelDto {
   model_name: string;
   make_name: string;
-  model_category: string;
+  bodyType: string;
   year_founded: string;
 }

@@ -1,4 +1,4 @@
-import { Between, FindOperator, ILike } from "typeorm";
+import { Between, FindOperator, ILike, Or } from "typeorm";
 export interface IFieldData {
   key: string;
   field: string;
@@ -49,5 +49,17 @@ export class HandleQuery {
       return orderByData as P;
     }
     return undefined;
+  }
+
+  handleOR(values: string): any {
+    let stringArr: string[] = [];
+    const arrActions = [];
+    if (values) {
+      stringArr = values.split(",");
+      stringArr.forEach((x) => {
+        arrActions.push(this.handleILike(x));
+      });
+    }
+    return Or(...arrActions);
   }
 }

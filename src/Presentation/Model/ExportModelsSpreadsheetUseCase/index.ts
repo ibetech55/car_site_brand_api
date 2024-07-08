@@ -26,6 +26,7 @@ export class ExportModelsSpreadsheetUsecase {
     columns: { key: string }[],
     queryValues: ModelPaginationDto
   ) {
+    console.log(queryValues)
     const columnsFields = [
       { field: "model_name", key: "modelName", order: 1, header: "Model Name" },
       {
@@ -45,16 +46,21 @@ export class ExportModelsSpreadsheetUsecase {
       {
         field: "updated_at",
         key: "updatedAt",
-        order: 6,
+        order: 7,
         header: "Updated At",
       },
       {
         field: "created_at",
         key: "createdAt",
-        order: 5,
+        order: 6,
         header: "Created At",
       },
-
+      {
+        field: "body_type",
+        key: "bodyType",
+        order: 5,
+        header: "Body Type",
+      }
     ];
 
 
@@ -73,6 +79,7 @@ export class ExportModelsSpreadsheetUsecase {
 
     const query: IPagination<IModelPagination, IModelOrderBy> = {
       where: {
+        body_type: queryValues.bodyType ? this._handleQuery.handleOR(queryValues.bodyType) : undefined,
         model_name: this._handleQuery.handleILike(queryValues?.modelName),
         created_at: this._handleQuery.handleBetweenDates(
           queryValues?.startDate,

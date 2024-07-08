@@ -3,7 +3,6 @@ import { v4 as uuid } from "uuid";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { Makes } from "./makes";
 import { Versions } from "./versions";
-import { versions } from "process";
 
 @Entity("models")
 class Models {
@@ -20,7 +19,7 @@ class Models {
   active: boolean;
 
   @Column()
-  model_category_id: string;
+  body_type: string;
 
   @Column()
   year_founded: number;
