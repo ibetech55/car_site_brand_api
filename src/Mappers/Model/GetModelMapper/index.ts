@@ -10,6 +10,7 @@ export class GetModelMapper {
       createdAt: values.created_at,
       updatedAt: values.updated_at,
       yearFounded: values.year_founded,
+      bodyType: values.body_type,
       make: {
         makeName: values.makes.make_name
       },

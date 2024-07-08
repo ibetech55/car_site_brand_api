@@ -12,7 +12,7 @@ export class DownloadCreateModelsTemplateUseCase {
       { header: "model_name", key: "model_name", width: 25 },
       { header: "year_founded", key: "year_founded", width: 25 },
       { header: "make_name", key: "make_name", width: 25 },
-      { header: "model_category", key: "model_category", width: 25 },
+      { header: "body_type", key: "body_type", width: 25 },
     ];
 
     res.setHeader(

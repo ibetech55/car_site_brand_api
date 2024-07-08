@@ -405,16 +405,22 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                modelName:
-                  type: string
-                makeId:
-                  type: string
-                company:
-                  type: string
-                yearFounded:
-                  type: string
+              type: array
+              items: 
+                type: object
+                properties:
+                  modelName:
+                    type: string
+                  makeId:
+                    type: string
+                  company:
+                    type: string
+                  yearFounded:
+                    type: number
+                  bodyType:
+                    type: array
+                    items:
+                      type: string
       responses:
         "201":
           description: Model created successfully

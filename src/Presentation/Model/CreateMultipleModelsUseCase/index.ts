@@ -53,21 +53,17 @@ export class CreateMultipleModelsUseCase {
     if (!columns.includes("make_name")) {
       columnErrors.push(columns[2]);
     }
-    if (!columns.includes("model_category")) {
+    if (!columns.includes("body_type")) {
       columnErrors.push(columns[3]);
     }
     if (columnErrors.length > 0 || columns.length !== 4) {
       errors.columnError = `Must contain only the followning columns [model_name, year_founded, make_name, model_category]`;
       throw new AppError(errors, 400);
     }
-console.log(data)
     for (let item of data) {
-      const [modelData, makeData, modelCatData] = await Promise.all([
+      const [modelData, makeData] = await Promise.all([
         this._modelRepository.getModelByName(item.model_name),
         this._makeRepository.getByMakeName(item.make_name),
-        this._modelCategoryRepository.getByModelCategoryType(
-          item.model_category
-        ),
       ]);
       if (modelData) {
         modelErrors.push(item.model_name);
@@ -76,15 +72,12 @@ console.log(data)
         makeErrors.push(item.make_name);
       }
 
-      if (!modelCatData) {
-        modelCatErrors.push(item.model_category);
-      }
 
-      if (!modelData && makeData && modelCatData) {
+      if (!modelData) {
         newData.push({
           model_name: item.model_name,
           make_id: makeData._id,
-          model_category_id: modelCatData._id,
+          body_type: item.bodyType,
           active: false,
           year_founded: makeData.year_founded ? makeData.year_founded : undefined
         });
