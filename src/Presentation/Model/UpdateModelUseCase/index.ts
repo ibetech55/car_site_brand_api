@@ -12,7 +12,6 @@ export class UpdateModelUseCase {
   ) {}
 
   async execute(id: string, values: UpdateModelDto) {
-    console.log(values, 666)
     let checkModelName: Models;
     let checkMake: Makes;
     const checkModel = await this._modelRepository.getById(id);

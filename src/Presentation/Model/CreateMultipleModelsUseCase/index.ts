@@ -77,7 +77,7 @@ export class CreateMultipleModelsUseCase {
         newData.push({
           model_name: item.model_name,
           make_id: makeData._id,
-          body_type: item.bodyType,
+          body_type: item.body_type,
           active: false,
           year_founded: makeData.year_founded ? makeData.year_founded : undefined
         });

@@ -23,6 +23,6 @@ export interface CreateMultipleModelsDto {
 export interface IModelExcelDto {
   model_name: string;
   make_name: string;
-  bodyType: string;
+  body_type: string;
   year_founded: string;
 }

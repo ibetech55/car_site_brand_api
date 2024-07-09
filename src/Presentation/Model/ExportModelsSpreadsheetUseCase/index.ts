@@ -26,7 +26,6 @@ export class ExportModelsSpreadsheetUsecase {
     columns: { key: string }[],
     queryValues: ModelPaginationDto
   ) {
-    console.log(queryValues)
     const columnsFields = [
       { field: "model_name", key: "modelName", order: 1, header: "Model Name" },
       {
