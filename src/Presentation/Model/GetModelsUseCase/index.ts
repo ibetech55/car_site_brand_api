@@ -43,6 +43,7 @@ export class GetModelsUseCase {
       { field: "origin", key: "origin" },
       { field: "created_at", key: "createdAt" },
       { field: "active", key: "status" },
+      { field: "year_founded", key: "yearFounded" },
     ];
     const query: IPagination<IModelPagination, IModelOrderBy> = {
       where: {

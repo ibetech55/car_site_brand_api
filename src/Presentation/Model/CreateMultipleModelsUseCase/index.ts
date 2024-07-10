@@ -37,7 +37,6 @@ export class CreateMultipleModelsUseCase {
     const errors: ModelErrors = {};
     const makeErrors: string[] = [];
     const modelErrors: string[] = [];
-    const modelCatErrors: string[] = [];
     const columnErrors: string[] = [];
     const newData: CreateModelDbDto[] = [];
     let fileData: UploadedFile;
@@ -79,26 +78,20 @@ export class CreateMultipleModelsUseCase {
           make_id: makeData._id,
           body_type: item.body_type,
           active: false,
-          year_founded: makeData.year_founded ? makeData.year_founded : undefined
+          year_founded: +item.year_founded ? +item.year_founded : undefined
         });
       }
     }
 
-    if (modelErrors.length > 0) {
-      errors.modelError = `The following models already exist ${JSON.stringify(
-        modelErrors
-      )}`;
-    }
+    // if (modelErrors.length > 0) {
+    //   errors.modelError = `The following models already exist ${JSON.stringify(
+    //     modelErrors
+    //   )}`;
+    // }
 
     if (makeErrors.length > 0) {
       errors.makeError = `The following makes do not exist ${JSON.stringify(
         makeErrors
-      )}`;
-    }
-
-    if (modelCatErrors.length > 0) {
-      errors.modelCategoryError = `The following Model Categories do not exist ${JSON.stringify(
-        modelCatErrors
       )}`;
     }
 

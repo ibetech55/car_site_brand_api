@@ -13,7 +13,6 @@ export class CreateModelUseCase {
   }
 
   async execute(values: CreateModelDto[]) {
-    console.log(values)
     const nameErrors = [];
     const newData: CreateModelDbDto[] = [];
     for (let model of values) {
@@ -38,17 +37,17 @@ export class CreateModelUseCase {
       }
     }
 
-    if (nameErrors.length > 0) {
-      throw new AppError(
-        {
-          text: `The following model names ${JSON.stringify(
-            nameErrors
-          )} already exist, please try agian`,
-          models: nameErrors,
-        },
-        400
-      );
-    }
+    // if (nameErrors.length > 0) {
+    //   throw new AppError(
+    //     {
+    //       text: `The following model names ${JSON.stringify(
+    //         nameErrors
+    //       )} already exist, please try agian`,
+    //       models: nameErrors,
+    //     },
+    //     400
+    //   );
+    // }
     const modelData = await this._modelRepository.create(newData);
 
     return modelData;

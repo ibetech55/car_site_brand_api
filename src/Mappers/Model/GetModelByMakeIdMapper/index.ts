@@ -8,6 +8,7 @@ export class GetModelsByMakeIdMapper {
       makeId: values.make_id,
       active: values.active,
       createdAt:values.created_at,
+      bodyType:values.body_type,
       makes:{
         makeName: values.makes.make_name,
       }
